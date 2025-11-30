@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Q2D2 - Audio Samples</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; line-height: 1.6; }
+    h1 { text-align: center; color: royalblue; } /* master title in royalblue */
+    h2 { margin-top: 40px; color: royalblue; }   /* section titles in royalblue */
+    h3 { margin-top: 20px; }
+
+    /* Table of contents styling */
+    .contents {
+      margin: 20px 0;
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .contents h2 { color: #333; margin-top: 0; }
+    .contents ul { list-style: none; padding-left: 0; }
+    .contents li { margin: 8px 0; }
+    .contents a { text-decoration: none; color: #0066cc; }
+    .contents a:hover { text-decoration: underline; }
+
+    /* Scrollable cards */
+    .scroll-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      white-space: nowrap;
+    }
+    .scroll-container::-webkit-scrollbar { height: 10px; }
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: #aaa;
+      border-radius: 5px;
+    }
+    .scroll-container::-webkit-scrollbar-track { background: #f0f0f0; }
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+      flex: 0 0 auto;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 15px;
+      background: #fafafa;
+    }
+	.color-strip {
+	 width: 100%;
+     height: 12px;         /* thickness of the strip */
+     background: linear-gradient(to right, royalblue, pink); 
+     margin-bottom: 15px;  /* space below the strip */
+     border-radius: 4px;   /* optional: rounded edges */
+	}
+}
+  </style>
+</head>
+<body>
+  <!-- Color strip -->
+  <div class="color-strip"></div>
+  <!-- Master Title -->
+  <h1>Q2D2: A geometry-aware audio codec leveraging two-dimensional quantization</h1>
+
+  <!-- 0. Contents -->
+  <div class="contents">
+    <h2>0. Contents</h2>
+    <ul>
+      <li><a href="#abstract">1. Abstract</a></li>
+      <li><a href="#section1">2. Comparison of Audio Codecs on Reconstruction: LibriSpeech and LJSpeech</a></li>
+      <li><a href="#section2">3. Comparison of Audio Codecs on Reconstruction: LibriTTS-test-clean and LibriTTS-test-other</a></li>
+    </ul>
+  </div>
+
+  <!-- Section 1: Abstract -->
+  <h2 id="abstract">1. Abstract</h2>
+  <p>
+    Recent neural audio codecs have achieved impressive reconstruction quality, typically relying on quantization 
+    methods such as Residual Vector Quantization (RVQ), Vector Quantization (VQ) and Finite Scalar Quantization (FSQ). 
+    However, these quantization techniques limit the geometric structure of the latent space, make it harder to capture 
+    correlations between features leading to inefficiency in representation learning, codebook utilization and token rate. 
+    In this paper we introduce Two-Dimensional Quantization (Q2D2), a quantization scheme in which feature pairs are projected 
+    onto structured 2D grids—such as hexagonal, rhombic, or rectangular tiling—and quantized to the nearest grid values, yielding 
+    an implicit codebook defined by the product of grid levels, with codebook sizes comparable to conventional methods. Despite its 
+    simple geometric formulation, Q2D2 improves audio compression efficiency, with low token rates and high codebook utilization 
+    while maintaining state-of-the-art (SOTA) reconstruction quality. Specifically, Q2D2 achieves competitive to superior 
+    performance in various objective and subjective reconstruction metrics, across extensive experiments in speech domain 
+    compared to SOTA models. Comprehensive ablation studies further confirm the effectiveness of our design choices.
+  </p>
+  <div style="text-align:center; margin:20px 0;">
+    <img src="figures/q2d2_diagram.png" 
+     alt="Q2D2 Figure" 
+     style="max-width:80%; border-radius:8px;">
+    <p><em>Figure 1: Visualization of quantization grids used in Q2D2</em></p>
+  </div>
+
+  <!-- Section 2: LibriSpeech + LJSpeech -->
+  <h2 id="section1">2. Comparison of Codecs on Audio Reconstruction: LibriSpeech and LJSpeech</h2>
+  <div class="scroll-container">
+    <!-- GT -->
+    <div class="card">
+      <h3>GT</h3>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/61-70968-0000_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/61-70968-0001_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/61-70968-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/61-70968-0003_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/61-70968-0004_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/61-70968-0005_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/LJ001-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/LJ001-0008_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/LJ001-0011_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/GT/LJ001-0017_length_fixed.wav"></audio>
+    </div>
+
+    <!-- WavTokenizer -->
+    <div class="card">
+      <h3>WavTokenizer @ 0.9kbps</h3>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/61-70968-0000_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/61-70968-0001_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/61-70968-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/61-70968-0003_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/61-70968-0004_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/61-70968-0005_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/LJ001-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/LJ001-0008_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/LJ001-0011_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/WavTokenizer/LJ001-0017_length_fixed.wav"></audio>
+    </div>
+
+    <!-- Q2D2 @ 1kbps -->
+    <div class="card">
+      <h3>Q2D2 @ 1kbps</h3>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/61-70968-0000_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/61-70968-0001_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/61-70968-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/61-70968-0003_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/61-70968-0004_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/61-70968-0005_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/LJ001-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/LJ001-0008_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/LJ001-0011_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_1kbps/LJ001-0017_length_fixed.wav"></audio>
+    </div>
+
+    <!-- Q2D2 @ 3.3kbps -->
+    <div class="card">
+      <h3>Q2D2 @ 3.3kbps</h3>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/61-70968-0000_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/61-70968-0001_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/61-70968-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/61-70968-0003_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/61-70968-0004_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/61-70968-0005_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/LJ001-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/LJ001-0008_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/LJ001-0011_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Q2D2_3kbps/LJ001-0017_length_fixed.wav"></audio>
+    </div>
+
+    <!-- Encodec @ 6kbps -->
+    <div class="card">
+      <h3>Encodec @ 6kbps</h3>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/61-70968-0000_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/61-70968-0001_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/61-70968-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/61-70968-0003_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/61-70968-0004_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/61-70968-0005_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/LJ001-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/LJ001-0008_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/LJ001-0011_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/Encodec_6kbps/LJ001-0017_length_fixed.wav"></audio>
+    </div>
+    <!-- DAC @ 9kbps -->
+    <div class="card">
+      <h3>DAC @ 9kbps</h3>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/61-70968-0000_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/61-70968-0001_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/61-70968-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/61-70968-0003_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/61-70968-0004_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/61-70968-0005_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/LJ001-0002_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/LJ001-0008_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/LJ001-0011_length_fixed.wav"></audio>
+      <audio controls src="samples/LibriSpeech_LJSpeech/DAC_9kbps/LJ001-0017_length_fixed.wav"></audio>
+    </div>
+  </div>
+
+  <!-- Section 3: LibriTTS -->
+  <h2 id="section2">3. Comparison of Codecs on Audio Reconstruction: LibriTTS-test-clean and LibriTTS-test-other</h2>
+  <div class="scroll-container">
+    <div class="scroll-container">
+
+    <div class="card">
+      <h3>GT</h3>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/GT/1580_141084_000009_000007.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/GT/260_123286_000029_000000.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/GT/3570_5694_000013_000008.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/GT/4077_13754_000002_000001.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/GT/7729_102255_000010_000007.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/GT/367_293981_000002_000000.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/GT/4294_14317_000009_000015.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/GT/533_1066_000020_000002.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/GT/7018_75789_000007_000001.in.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/GT/7975_280057_000010_000008.in.wav"></audio>
+    </div>
+
+	<div class="card">
+      <h3>WavTokenizer @ 0.9kbps</h3>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/WavTokenizer/1580_141084_000009_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/WavTokenizer/260_123286_000029_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/WavTokenizer/3570_5694_000013_000008.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/WavTokenizer/4077_13754_000002_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/WavTokenizer/7729_102255_000010_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/WavTokenizer/367_293981_000002_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/WavTokenizer/4294_14317_000009_000015.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/WavTokenizer/533_1066_000020_000002.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/WavTokenizer/7018_75789_000007_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/WavTokenizer/7975_280057_000010_000008.out.wav"></audio>
+    </div>
+	
+    <div class="card">
+      <h3>Q2D2 @ 1kbps</h3>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_1K/1580_141084_000009_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_1K/260_123286_000029_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_1K/3570_5694_000013_000008.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_1K/4077_13754_000002_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_1K/7729_102255_000010_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_1K/367_293981_000002_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_1K/4294_14317_000009_000015.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_1K/533_1066_000020_000002.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_1K/7018_75789_000007_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_1K/7975_280057_000010_000008.out.wav"></audio>
+    </div>
+
+    <div class="card">
+      <h3>Q2D2 @ 3.3kbps</h3>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_3.3K/1580_141084_000009_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_3.3K/260_123286_000029_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_3.3K/3570_5694_000013_000008.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_3.3K/4077_13754_000002_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_3.3K/7729_102255_000010_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_3.3K/367_293981_000002_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_3.3K/4294_14317_000009_000015.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_3.3K/533_1066_000020_000002.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_3.3K/7018_75789_000007_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_3.3K/7975_280057_000010_000008.out.wav"></audio>
+    </div>
+
+    <div class="card">
+      <h3>Q2D2 @ 6.9kbps</h3>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_6.9K/1580_141084_000009_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_6.9K/260_123286_000029_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_6.9K/3570_5694_000013_000008.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_6.9K/4077_13754_000002_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-clean/Q2D2_6.9K/7729_102255_000010_000007.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_6.9K/367_293981_000002_000000.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_6.9K/4294_14317_000009_000015.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_6.9K/533_1066_000020_000002.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_6.9K/7018_75789_000007_000001.out.wav"></audio>
+      <audio controls src="samples/LibriTTS/LibriTTS-test-other/Q2D2_6.9K/7975_280057_000010_000008.out.wav"></audio>
+    </div>
+  </div>
+
+</body>
+</html>
