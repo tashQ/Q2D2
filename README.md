@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ## Infer
 
-### Part1: Reconstruct audio from raw wav
+### Part1: Reconstruct audio from raw wav (build on wavtokenizer framework)
 
 ```python
 
@@ -97,18 +97,7 @@ bandwidth_id = torch.tensor([0])
 audio_out = wavtokenizer.decode(features, bandwidth_id=bandwidth_id)
 ```
 
-## Available models
-🤗 links to the Huggingface model hub.
-
-| Model name                                                          |                                                                                                            HuggingFace                                                                                                             |  Corpus  |  Token/s  | Domain | Open-Source |
-|:--------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------:|:---------:|:----------:|:------:|
-| WavTokenizer-small-600-24k-4096             |             [🤗](https://huggingface.co/novateur/WavTokenizer/blob/main/WavTokenizer_small_600_24k_4096.ckpt)    | LibriTTS  | 40  |  Speech  | √ |
-| WavTokenizer-small-320-24k-4096             |             [🤗](https://huggingface.co/novateur/WavTokenizer/blob/main/WavTokenizer_small_320_24k_4096.ckpt)     | LibriTTS  | 75 |  Speech  | √|
-| WavTokenizer-medium-320-24k-4096                 |               [🤗](https://huggingface.co/collections/novateur/wavtokenizer-medium-large-66de94b6fd7d68a2933e4fc0)         | 10000 Hours | 75 |  Speech, Audio, Music  | √ |
-| WavTokenizer-large-600-24k-4096 | [🤗](https://huggingface.co/novateur/WavTokenizer-large-unify-40token) | 80000 Hours | 40 |   Speech, Audio, Music   | √|
-| WavTokenizer-large-320-24k-4096   | [🤗](https://huggingface.co/novateur/WavTokenizer-large-speech-75token) | 80000 Hours | 75 |   Speech, Audio, Music   | √ |
-
-      
+     
 
 ## Training
 
@@ -135,20 +124,17 @@ python train.py fit --config ./configs/xxx.yaml
 
 ## Citation
 
-If this code contributes to your research, please cite our work, Language-Codec and WavTokenizer:
+If this code contributes to your research, please cite our work Q2D2:
 
 ```
-@article{ji2024wavtokenizer,
-  title={Wavtokenizer: an efficient acoustic discrete codec tokenizer for audio language modeling},
-  author={Ji, Shengpeng and Jiang, Ziyue and Wang, Wen and Chen, Yifu and Fang, Minghui and Zuo, Jialong and Yang, Qian and Cheng, Xize and Wang, Zehan and Li, Ruiqi and others},
-  journal={arXiv preprint arXiv:2408.16532},
-  year={2024}
+@misc{shuster2025q2d2geometryawareaudiocodec,
+      title={Q2D2: A Geometry-Aware Audio Codec Leveraging Two-Dimensional Quantization}, 
+      author={Tal Shuster and Eliya Nachmani},
+      year={2025},
+      eprint={2512.01537},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD},
+      url={https://arxiv.org/abs/2512.01537}, 
 }
 
-@article{ji2024language,
-  title={Language-codec: Reducing the gaps between discrete codec representation and speech language models},
-  author={Ji, Shengpeng and Fang, Minghui and Jiang, Ziyue and Huang, Rongjie and Zuo, Jialung and Wang, Shulei and Zhao, Zhou},
-  journal={arXiv preprint arXiv:2402.12208},
-  year={2024}
-}
 ```
