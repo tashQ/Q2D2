@@ -4,7 +4,7 @@ Two-dimensional quantization for geometry-aware audio coding
 
 
 [![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2512.01537v1)
-[![demo](https://img.shields.io/badge/WanTokenizer-Demo-red)](https://wavtokenizer.github.io/)
+[![demo](https://img.shields.io/badge/Q2D2-Demo-red)](https://tashq.github.io/Q2D2/)
 [![model](https://img.shields.io/badge/%F0%9F%A4%97%20WavTokenizer-Models-blue)](https://huggingface.co/novateur/WavTokenizer)
 
 
