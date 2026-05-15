@@ -12,24 +12,11 @@ Two-dimensional quantization for geometry-aware audio coding
 ### 🎉🎉 with Q2D2, you can represent speech, music, and audio with only 75 tokens per second!
 ### 🎉🎉 with Q2D2, You can get strong reconstruction results.
 
-<!--
-# Tips
-We have noticed that several works (approximately exceed ten recent months) have incorrectly cited WavTokenizer. Below is the correct citation format. We sincerely appreciate the community's attention and interest.
-```
-@article{ji2024wavtokenizer,
-  title={Wavtokenizer: an efficient acoustic discrete codec tokenizer for audio language modeling},
-  author={Ji, Shengpeng and Jiang, Ziyue and Wang, Wen and Chen, Yifu and Fang, Minghui and Zuo, Jialong and Yang, Qian and Cheng, Xize and Wang, Zehan and Li, Ruiqi and others},
-  journal={arXiv preprint arXiv:2408.16532},
-  year={2024}
-}
-```
--->
+
 
 # 🔥 News
-- *2025.02.25*: We update WavTokenizer camera ready version for ICLR 2025 and update WavTokenizer-large-v2 checkpoint on [huggingface](https://huggingface.co/novateur/WavTokenizer-large-speech-75token). 
-- *2024.10.22*: We update WavTokenizer on arxiv and release WavTokenizer-Large checkpoint.
-- *2024.09.09*: We release WavTokenizer-medium checkpoint on [huggingface](https://huggingface.co/collections/novateur/wavtokenizer-medium-large-66de94b6fd7d68a2933e4fc0).
-- *2024.08.31*: We release WavTokenizer on arxiv.
+- *2026.05.16*: We update Q2D2 camera ready version for ICLR 2026 on arxiv.
+- *2026.12.01*: We release WavTokenizer on arxiv.
 
 ![result](result.png)
 
